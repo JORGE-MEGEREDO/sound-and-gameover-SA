@@ -10,16 +10,23 @@ var boats = [];
 var boatAnimation = [];
 var boatSpritedata, boatSpritesheet;
 
+var score = 0;
 var brokenBoatAnimation = [];
 var brokenBoatSpritedata, brokenBoatSpritesheet;
 
 function preload() {
   backgroundImg = loadImage("./assets/background.gif");
+  backgroundMusic loadSound("./assets/background music.mp3");
+  waterSound loadSound("./assets/cannon water.mp3");
+  pirateLaughSound loadSound("./assets/pirate_laugh.mp3");
+  cannonExplosion = loadSound("./assets/cannon_explosion.mp3");
   towerImage = loadImage("./assets/tower.png");
   boatSpritedata = loadJSON("assets/boat/boat.json");
   boatSpritesheet = loadImage("assets/boat/boat.png");
   brokenBoatSpritedata = loadJSON("assets/boat/broken_boat.json");
   brokenBoatSpritesheet = loadImage("assets/boat/broken_boat.png");
+  var isGameOver = false;
+  var isLaughing = false;
 }
 
 function setup() {
@@ -49,7 +56,10 @@ function setup() {
 function draw() {
   background(189);
   image(backgroundImg, 0, 0, width, height);
+  
+  if (!backgroundMusic.isPlaying()) { 
 
+backgroundMusic.play();  backgroundMusic.setVolume (0.1);
 
   Engine.update(engine);
   ground.display();
